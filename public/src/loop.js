@@ -97,12 +97,15 @@ function onMouseDown(event)
             for(var k = 0; k < tableCode[j][i].obj.length; k++) {
                 if (tableCode[j][i].obj[k].name === object.name) {
                     tableCode[j][i].val = (tableCode[j][i].val + 1) % 10;
+                    strValue[i + 4 * j] = tableCode[j][i].val;
                     tableCode[j][i].dirty = true;
                     break;
                 }
             }
         }
     }
+    console.log(tableCode);
+
     render();
 }
 
@@ -126,7 +129,7 @@ function match() {
     var exists = false;
     for (var i = 0; i < childsPanel.length; i++)
     {
-        if (childsPanel[i].value == strValue)
+        if (childsPanel[i].value === strValue)
         {
             exists = true;
             break;
@@ -352,16 +355,15 @@ function onWindowResize() {
 
 function changeValue(value)
 {
-    var index = 0;
     strValue = value;
     for (var j = 0; j < tableCode.length; j++) {
         for (var k = 0; k < tableCode[j].length; k++)
         {
-            tableCode[j][k].val = value[index];
+            tableCode[j][k].val = parseInt(value[k + 4 * j]);
             tableCode[j][k].dirty = true;
-            index++;
         }
     }
+    console.log(tableCode);
     render();
 }
 
@@ -485,6 +487,8 @@ function init()
 
         panel = document.getElementById("panel");
         iframe =  document.getElementById("content");
+        iframe.style.zoom = scale;
+        iframe.style.transform = ("scale(" + scale + ")");
         window.addEventListener('resize', onWindowResize, false)
         renderer.domElement.addEventListener( 'mousemove', onMouseMove, false );
         renderer.domElement.addEventListener( 'mousedown', onMouseDown, false );
