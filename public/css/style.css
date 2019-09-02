@@ -1,3 +1,30 @@
 body {
     overflow: hidden;
 }
+
+button{
+    opacity: 1;
+    background-color: white;
+    font-size: 20pt;
+    font-family: Arial, sans-serif;
+    border: 1px solid black;
+    color:black;
+}
+button:hover {
+    opacity: 1;
+    color: white;
+    background-color: black;
+    font-size: 20pt;
+    font-family: Arial, sans-serif;
+    border: 1px solid white;
+}
+
+#panel{
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
+}
+
+#content{
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
+}

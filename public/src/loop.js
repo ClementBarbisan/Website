@@ -112,7 +112,7 @@ function onMouseDown(event)
 function unzoom() {
     if (camera.zoom < 1)
     {    document.getElementById("button").onclick = match;
-        document.getElementById("button").innerText = "Match";
+        document.getElementById("button").innerText = "MATCH";
         return;
     }
     else
@@ -140,7 +140,7 @@ function match() {
         setTimeout(function(){
             document.getElementById("button").innerText = val;
         }, 2500);
-        document.getElementById("button").innerText = "No match";
+        document.getElementById("button").innerText = "NO MATCH";
         return;
     }
     if (camera.zoom > 100)
@@ -375,6 +375,9 @@ function init()
 {
     canvasWidth = window.innerWidth - 25;
     canvasHeight = window.innerHeight - 25 - 50;
+    iframe = document.getElementById("content");
+    iframe.style.zoom = scale;
+    iframe.style.transform = ("scale(" + scale + ")");
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
     camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 1000);
@@ -406,7 +409,7 @@ function init()
             } );
             var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
             var mesh = new THREE.Mesh( geom, material ) ;
-            mesh.translateX(-canvasWidth / 2 + lineWidth * index + 40);
+            mesh.translateX(-canvasWidth / 2 + lineWidth * index + 47);
             mesh.translateY(-canvasHeight / 2);
             scene.add(mesh);
             val.text = mesh;
@@ -451,7 +454,7 @@ function init()
             } );
             var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
             var mesh = new THREE.Mesh( geom, material ) ;
-            mesh.translateX(-canvasWidth / 2 + lineWidth * index + 40);
+            mesh.translateX(-canvasWidth / 2 + lineWidth * index + 47);
             mesh.translateY(-canvasHeight / 2);
             scene.add(mesh);
             val.text = mesh;
@@ -482,13 +485,11 @@ function init()
             createShape(index, m % 2);
             index++;
         }
-        document.getElementById("button").innerText = "Match";
+        document.getElementById("button").innerText = "MATCH";
         renderer.render(scene, camera);
 
         panel = document.getElementById("panel");
-        iframe =  document.getElementById("content");
-        iframe.style.zoom = scale;
-        iframe.style.transform = ("scale(" + scale + ")");
+
         window.addEventListener('resize', onWindowResize, false)
         renderer.domElement.addEventListener( 'mousemove', onMouseMove, false );
         renderer.domElement.addEventListener( 'mousedown', onMouseDown, false );
