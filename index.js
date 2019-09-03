@@ -8,6 +8,11 @@ app.listen(4567, function() {
 	console.log('server running on port 4567');
 } )
 
+app.get('/mobile', function(req, res)
+{
+    res.render('mobile');
+});
+
 app.get('/files', function(req, res)
 {
     var files = fs.readdirSync('./public');
