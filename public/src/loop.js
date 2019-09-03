@@ -51,8 +51,8 @@ function createShapeDynamic(index, flagColor, indexTable, val)
     //geometry.vertices.push(
     shape.moveTo(-canvasWidth / 2 + lineWidth * index, (canvasWidth * 9 /16) / 2);
     shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), (canvasWidth * 9 /16) / 2);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), -(canvasWidth * 9 /16) / 2 + (canvasWidth / canvasHeight * 50));
-    shape.lineTo(-canvasWidth / 2 + lineWidth * index, -(canvasWidth * 9 /16) / 2 + (canvasWidth / canvasHeight * 50));
+    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), -(canvasWidth * 9 /16) / 2 + (canvasWidth * 9 / 16 / 5));
+    shape.lineTo(-canvasWidth / 2 + lineWidth * index, -(canvasWidth * 9 /16) / 2 + (canvasWidth * 9 / 16 / 5));
     shape.lineTo(-canvasWidth / 2 + lineWidth * index, (canvasWidth * 9 /16) / 2);
     geometry = new THREE.ShapeBufferGeometry(shape);
     val.geom.push(geometry);
@@ -390,6 +390,7 @@ function init()
     lineWidth = canvasWidth / 67;
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
+
     var loader = new THREE.FontLoader();
     loader.load( 'fonts/Coolvetica Rg_Regular.json', function ( fontLoad ) {
         font = fontLoad
@@ -410,7 +411,7 @@ function init()
             var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
             var mesh = new THREE.Mesh( geom, material ) ;
             mesh.translateX(-canvasWidth / 2 + lineWidth * index + lineWidth * 3);
-            mesh.translateY(-(canvasWidth * 9 /16) / 2);
+            mesh.translateY(-(canvasWidth * 9 / 16 / 1.2) / 2);
             scene.add(mesh);
             val.text = mesh;
             val.dirty = false;
@@ -455,7 +456,7 @@ function init()
             var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
             var mesh = new THREE.Mesh( geom, material ) ;
             mesh.translateX(-canvasWidth / 2 + lineWidth * index + lineWidth * 3);
-            mesh.translateY(-(canvasWidth * 9 /16) / 2);
+            mesh.translateY(-(canvasWidth * 9 / 16 / 1.2) / 2);
             scene.add(mesh);
             val.text = mesh;
             val.dirty = false;
@@ -489,7 +490,11 @@ function init()
         renderer.render(scene, camera);
 
         panel = document.getElementById("panel");
-
+        while (childsPanel.length > 0)
+        {
+            panel.removeChild(childsPanel[0]);
+            childsPanel.shift();
+        }
         window.addEventListener('resize', onWindowResize, false)
         renderer.domElement.addEventListener( 'mousemove', onMouseMove, false );
         renderer.domElement.addEventListener( 'mousedown', onMouseDown, false );
