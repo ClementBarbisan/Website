@@ -10,10 +10,10 @@ var lineWidth;
 var font;
 var iframe;
 var panel;
-var posPanel = 100;
 var scale= 0.0001;
 var canvasWidth = window.innerWidth - 25;
 var canvasHeight = window.innerHeight - 25 - 50;
+var posPanel = canvasWidth;
 var staticShapes = [];
 var tableCode = [[{obj : [], val:0, text:null, dirty:true, geom:[], mat:[]}, {obj : [], val:0, text:null, dirty:true, geom:[], mat:[]}, {obj : [], val:0,  text:null, dirty:true,geom:[], mat:[]}, {obj : [], val:0,  text:null, dirty:true, geom:[], mat:[]}],[
     {obj : [], val:0,  text:null, dirty:true, geom:[], mat:[]}, {obj : [], val:0,  text:null, dirty:true, geom:[], mat:[]}, {obj : [], val:0,  text:null, dirty:true, geom:[], mat:[]}, {obj : [], val:0,  text:null, dirty:true, geom:[], mat:[]}]];
@@ -49,11 +49,11 @@ function createShapeDynamic(index, flagColor, indexTable, val)
     var shape = new THREE.Shape();
 
     //geometry.vertices.push(
-    shape.moveTo(-canvasWidth / 2 + lineWidth * index, canvasHeight / 2);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), canvasHeight / 2);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), -canvasHeight / 2 + 100);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * index, -canvasHeight / 2 + 100);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * index, canvasHeight / 2);
+    shape.moveTo(-canvasWidth / 2 + lineWidth * index, (canvasWidth * 9 /16) / 2);
+    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), (canvasWidth * 9 /16) / 2);
+    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), -(canvasWidth * 9 /16) / 2 + (canvasWidth / canvasHeight * 50));
+    shape.lineTo(-canvasWidth / 2 + lineWidth * index, -(canvasWidth * 9 /16) / 2 + (canvasWidth / canvasHeight * 50));
+    shape.lineTo(-canvasWidth / 2 + lineWidth * index, (canvasWidth * 9 /16) / 2);
     geometry = new THREE.ShapeBufferGeometry(shape);
     val.geom.push(geometry);
     if (flagColor === 0) {
@@ -160,9 +160,9 @@ function match() {
 }
 
 function panelDisparition() {
-    if (posPanel < 100 && timer != null) {
-        panel.style.left = posPanel + "%";
-        posPanel += 0.1;
+    if (posPanel <= canvasWidth && timer != null) {
+        panel.style.left = (posPanel / canvasWidth * 100) + "%";
+        posPanel += canvasWidth / 100 * 0.5;
         requestAnimationFrame(panelDisparition)
     }
     else
@@ -174,10 +174,10 @@ function panelApparition()
     clearTimeout(timer);
     timer = null;
     insideLoop = true;
-    if (posPanel > 90)
+    if (posPanel > canvasWidth / 100 * 80)
     {
-        panel.style.left = posPanel + "%";
-        posPanel -= 0.1;
+        panel.style.left = (posPanel / canvasWidth * 100) + "%";
+        posPanel -= canvasWidth / 100 * 0.5;
         requestAnimationFrame(panelApparition);
     }
     else {
@@ -280,11 +280,11 @@ function createShape(index, flagColor)
     var shape = new THREE.Shape();
 
     //geometry.vertices.push(
-    shape.moveTo(-canvasWidth / 2 + lineWidth * index, -canvasHeight / 2);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), -canvasHeight / 2);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), canvasHeight / 2);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * index, canvasHeight / 2);
-    shape.lineTo(-canvasWidth / 2 + lineWidth * index, -canvasHeight / 2);
+    shape.moveTo(-canvasWidth / 2 + lineWidth * index, -(canvasWidth * 9 /16) / 2);
+    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), -(canvasWidth * 9 /16) / 2);
+    shape.lineTo(-canvasWidth / 2 + lineWidth * (index + 1), (canvasWidth * 9 /16) / 2);
+    shape.lineTo(-canvasWidth / 2 + lineWidth * index, (canvasWidth * 9 /16) / 2);
+    shape.lineTo(-canvasWidth / 2 + lineWidth * index, -(canvasWidth * 9 /16) / 2);
     geometry = new THREE.ShapeBufferGeometry(shape);
     if (flagColor === 0) {
         material = new THREE.MeshBasicMaterial({
@@ -409,8 +409,8 @@ function init()
             } );
             var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
             var mesh = new THREE.Mesh( geom, material ) ;
-            mesh.translateX(-canvasWidth / 2 + lineWidth * index + 47);
-            mesh.translateY(-canvasHeight / 2);
+            mesh.translateX(-canvasWidth / 2 + lineWidth * index + lineWidth * 3);
+            mesh.translateY(-(canvasWidth * 9 /16) / 2);
             scene.add(mesh);
             val.text = mesh;
             val.dirty = false;
@@ -454,8 +454,8 @@ function init()
             } );
             var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
             var mesh = new THREE.Mesh( geom, material ) ;
-            mesh.translateX(-canvasWidth / 2 + lineWidth * index + 47);
-            mesh.translateY(-canvasHeight / 2);
+            mesh.translateX(-canvasWidth / 2 + lineWidth * index + lineWidth * 3);
+            mesh.translateY(-(canvasWidth * 9 /16) / 2);
             scene.add(mesh);
             val.text = mesh;
             val.dirty = false;
