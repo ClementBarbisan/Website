@@ -1,0 +1,49 @@
+body {
+    overflow: hidden;
+    background-color: black;
+    border-radius: 10px;
+}
+
+#close{
+    position: fixed;
+    right: 5%;
+    top: 5%;
+    border: white;
+    border-radius: 0;
+    background-color: white;
+    margin-top: 0;
+}
+
+#close:hover{
+    background-color: black;
+    border: white;
+    border-radius: 0;
+}
+
+button{
+    margin-top: 5%;
+    opacity: 1;
+    background-color: white;
+    font-size: 100%;
+    font-family: Arial, sans-serif;
+    border: 1px solid black;
+    color:black;
+    border-radius: 5px;
+}
+button:hover {
+    opacity: 1;
+    color: white;
+    background-color: black;
+    font-size: 100%;
+    font-family: Arial, sans-serif;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#panel{
+    background-color: black;
+}
+
+#content{
+    background-color: white;
+}

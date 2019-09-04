@@ -23,7 +23,7 @@ var insideLoop = false;
 var timer = null;
 var strValue = "00000000";
 var childsPanel = [];
-var dictionary = [["19882109", "CV"], ["20170510", "Bodyfail"]];
+var dictionary = [["20170510", "Bodyfail"], ["20170611", "Traversée du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthète"], ["20142111", "Génétype"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
 
 function changeColor(index, flagColor, val)
 {
@@ -174,7 +174,7 @@ function panelApparition()
     clearTimeout(timer);
     timer = null;
     insideLoop = true;
-    if (posPanel > canvasWidth / 100 * 80)
+    if (posPanel > canvasWidth / 100 * 90)
     {
         panel.style.left = (posPanel / canvasWidth * 100) + "%";
         posPanel -= canvasWidth / 100 * 0.5;
@@ -507,10 +507,11 @@ function init()
                 if (files[i].includes(".html"))
                 {
                     var str = files[i].substring(0, files[i].length - 5);
+                    var currentStr = (' ' + str).slice(1);
                     var element = document.createElement("button");
                     //Assign different attributes to the element.
                     element.id = str;
-                    element.setAttribute("style","width:100%; height : 5%");
+                    element.setAttribute("style","width:100%; max-height : 20%");
                     element.innerText = str;
                     for (var j = 0; j < dictionary.length; j++)
                     {
@@ -520,10 +521,12 @@ function init()
                     element.type = "button";
                     element.value = str;
                     element.name = str;
-                    element.onclick = function(){
-                        changeValue(str);
-                        iframe.src = str + ".html";
-                    };
+                    element.onclick = function(index) {
+                        return function () {
+                            changeValue(index);
+                            iframe.src = index + ".html";
+                        };
+                    }(str);
                     childsPanel.push(element);
                     panel.appendChild(element);
                 }
