@@ -143,7 +143,7 @@ function zoom()
         return;
     }
     else
-        requestAnimationFrame(match);
+        requestAnimationFrame(zoom);
     camera.updateProjectionMatrix();
     camera.zoom += 1;
     scale *= 1.095;
