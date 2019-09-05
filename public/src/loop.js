@@ -139,6 +139,12 @@ function zoom()
     {
         document.getElementById("button").onclick = unzoom;
         document.getElementById("button").innerText = "X";
+        console.log(content.contentDocument.getElementById("data"));
+        var text = content.contentDocument.createElement("div");
+        text.innerText = strValue;
+        text.setAttribute("style", "font:typewriter; color:red;position: fixed; left:86%;top:79%;transform: rotate(35deg);background-image: url('stamp.png'); width:109px; height:109px; vertical-align:middle; text-align:center; line-height:109px;background-size:contain");
+        //text.position = element.position;
+        content.contentDocument.getElementById("data").insertAdjacentElement('afterbegin', text);
         zooming = false;
         return;
     }
