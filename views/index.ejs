@@ -22,16 +22,16 @@
 
         <main>
 
-            <iframe id="content" style="position: absolute; width: 80%; height:100%; left:10%; top:0; zoom: 0.0001;-moz-transform: scale(0.0001)" src="" >
+            <div id="content" style="position: absolute; width: 80%; height:100%; left:10%; top:0; zoom: 0.0001;-moz-transform: scale(0.0001); border-radius: 5px;">
+                <iframe style="width: 100%; height: 100%; border: 0;" id="iframe" src="" >
 
-            </iframe>
+                </iframe>
+            </div>
             <div id="canvas">
 
             </div>
-            <div style="position:absolute; top:95%;left:50%; width:10%; -moz-transform: translateX(-50%);transform: translateX(-50%)">
-                <button id="button" onclick="match()" >MATCH</button>
-            </div>
-            <div id="panel" style="position: absolute; width:10%; height:100%; top:0;left:100%;">
+                <button id="button" style="position:absolute; top:95%;left:50%; -moz-transform: translateX(-50%);transform: translateX(-50%)" onclick="match()" >MATCH</button>
+            <div id="panel" style="position: absolute; width:150px; height:100%; top:0;left:100%;overflow-y:auto; overflow-x: hidden;scrollbar-width: thin;">
 
             </div>
         </main>

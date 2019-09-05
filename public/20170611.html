@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-    </script>
-    <script src="../library/math.js">
-    </script>
-    <script src="../library/three.js">
-    </script>
+
     <link rel="stylesheet" href="../css/mobileStyle.css">
 
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>La traversée du silence</title>
 </head>
-<body style="background-color: white;">
+<body style="padding-top:5%; background-color: darkgray;overflow-x: hidden; overflow-y: auto; scrollbar-width: thin;">
+<div style="padding-top:-10%; margin-right:2%; display:inline;float: left;">
+
+    <div class="plyr__video-embed" id="player">
+        <iframe width="640" height="480"
+                src="https://player.vimeo.com/video/241494529?loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media"
+                allowfullscreen
+                allowtransparency
+                allow="autoplay"
+        ></iframe>
+    </div>
+</div>
+<div style="font-family: Arial, sans-serif;"> Performance audiovisuelle réalisée au cours des CED 2017.
+</div>
 </body>
 <script src="../src/mobile.js">
+</script>
 
+<script src="../library/plyr.js"></script>
+<script>
+    plyr.setup('#video');
 </script>
 </html>

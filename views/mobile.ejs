@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <title>Clement Barbisan</title>
 </head>
-<script src="../library/math.js">
-</script>
-<script src="../library/three.js">
-</script>
+
 <link rel="stylesheet" href="../css/mobileStyle.css">
 
 <body>
 
 <div id="panel" style="position:absolute; top:10%;left:50%; width:33%; -moz-transform: translateX(-50%);transform: translateX(-50%)">
 </div>
-<iframe id="content" style="position: absolute; width: 75%; height:75%; left:12.5%; top:0; zoom: 0.0001;-moz-transform: scale(0.0001)" src="" >
 
-</iframe>
+<div id="content" style="position: absolute; width: 80%; height:100%; left:10%; top:0; zoom: 0.0001;-moz-transform: scale(0.0001); border-radius: 5px;">
+    <iframe style="width: 100%; height: 100%;border:0;background-color: rgba(0,0,0,0)" id="iframe" src="" >
+
+    </iframe>
+</div>
 </body>
 <script>
     var scale = 0.0001;
     var panel = document.getElementById("panel");
-    var iframe = document.getElementById("content");
-    var dictionary = [["20170510", "Bodyfail"], ["20170611", "Traversée du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthète"], ["20142111", "Génétype"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
+    var iframe = document.getElementById("iframe");
+    var content = document.getElementById("content");
+    var dictionary = [["20190603", "Babel Interpreter"], ["20170510", "Bodyfail"], ["20170611", "Traversée du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthète"], ["20142111", "Génétype"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
 
 
     function httpGetAsync(theUrl, callback)
@@ -37,7 +38,6 @@
     }
 
     function match() {
-        console.log(window.scale);
         if (window.scale > 0.9)
         {
             return;
@@ -45,8 +45,8 @@
         else
             requestAnimationFrame(match);
         window.scale *= 1.1;
-        iframe.style.zoom = window.scale;
-        iframe.style.transform = ("scale(" + window.scale + ")");
+        content.style.zoom = window.scale;
+        content.style.transform = ("scale(" + window.scale + ")");
     }
 
     function init() {
@@ -56,25 +56,28 @@
             for (var i = 0; i < files.length; i++) {
                 if (files[i].includes(".html")) {
                     var str = files[i].substring(0, files[i].length - 5);
-                    var element = document.createElement("button");
-                    //Assign different attributes to the element.
-                    element.id = str;
-                    element.setAttribute("style", "width:100%; max-height : 20%");
-                    element.innerText = str;
                     for (var j = 0; j < dictionary.length; j++) {
-                        if (dictionary[j][0] === str)
+                        if (dictionary[j][0] === str) {
+                            var element = document.createElement("button");
+                            //Assign different attributes to the element.
+                            element.id = str;
+                            element.setAttribute("style", "width:100%; max-height : 20%");
+                            element.innerText = str;
                             element.innerText = dictionary[j][1];
+                            element.innerText = dictionary[j][1];
+                            element.type = "button";
+                            element.value = str;
+                            element.name = str;
+                            element.onclick = function (index) {
+                                return function () {
+                                    iframe.src = index + ".html";
+                                    match();
+                                };
+                            }(str);
+                            panel.appendChild(element);
+                        }
                     }
-                    element.type = "button";
-                    element.value = str;
-                    element.name = str;
-                    element.onclick = function (index) {
-                        return function () {
-                            match(iframe);
-                            iframe.src = index + ".html";
-                        };
-                    }(str);
-                    panel.appendChild(element);
+
                 }
             }
         });

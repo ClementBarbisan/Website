@@ -9,6 +9,7 @@ var material;
 var lineWidth;
 var font;
 var iframe;
+var content;
 var panel;
 var scale= 0.0001;
 var canvasWidth = window.innerWidth - 25;
@@ -21,9 +22,10 @@ var tableValue = [[3,2,1,1], [2,2,2,1], [2,1,2,2], [1,4,1,1], [1,1,3,2],
     [1,2,3,1], [1,1,1,4], [1,3,1,2],[1,2,1,3],[3,1,1,2]];
 var insideLoop = false;
 var timer = null;
+var zooming = false;
 var strValue = "00000000";
 var childsPanel = [];
-var dictionary = [["20170510", "Bodyfail"], ["20170611", "Traversée du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthète"], ["20142111", "Génétype"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
+var dictionary = [["20190603", "Babel Interpreter"], ["20170510", "Bodyfail"], ["20170611", "Traversée du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthète"], ["20142111", "Génétype"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
 
 function changeColor(index, flagColor, val)
 {
@@ -82,6 +84,8 @@ function createShapeDynamic(index, flagColor, indexTable, val)
 
 function onMouseDown(event)
 {
+    if(zooming)
+        return;
     // update the picking ray with the camera and mouse position
     raycaster.setFromCamera( mouse, camera );
 
@@ -110,9 +114,12 @@ function onMouseDown(event)
 }
 
 function unzoom() {
+    zooming = true;
     if (camera.zoom < 1)
     {    document.getElementById("button").onclick = match;
         document.getElementById("button").innerText = "MATCH";
+        zooming = false;
+        content.src = "";
         return;
     }
     else
@@ -125,28 +132,14 @@ function unzoom() {
     renderer.render(scene, camera);
 }
 
-function match() {
-    var exists = false;
-    for (var i = 0; i < childsPanel.length; i++)
-    {
-        if (childsPanel[i].value === strValue)
-        {
-            exists = true;
-            break;
-        }
-    }
-    if (!exists) {
-        var val = document.getElementById("button").innerText;
-        setTimeout(function(){
-            document.getElementById("button").innerText = val;
-        }, 2500);
-        document.getElementById("button").innerText = "NO MATCH";
-        return;
-    }
+function zoom()
+{
+    zooming = true;
     if (camera.zoom > 100)
     {
         document.getElementById("button").onclick = unzoom;
         document.getElementById("button").innerText = "X";
+        zooming = false;
         return;
     }
     else
@@ -159,10 +152,36 @@ function match() {
     renderer.render(scene, camera);
 }
 
+function match() {
+    httpGetAsync("/files", function(files) {
+        files = JSON.parse(files);
+        var exists = false;
+        for (var i = 0; i < files.length; i++) {
+            if (files[i].includes(".html")) {
+                var str = files[i].substring(0, files[i].length - 5);
+                if (str === strValue) {
+                    content.src = str + ".html";
+                    exists = true;
+                    break;
+                }
+            }
+        }
+        if (!exists) {
+            var val = document.getElementById("button").innerText;
+            setTimeout(function () {
+                document.getElementById("button").innerText = val;
+            }, 2500);
+            document.getElementById("button").innerText = "NO MATCH";
+            return;
+        }
+        zoom();
+    });
+}
+
 function panelDisparition() {
-    if (posPanel <= canvasWidth && timer != null) {
-        panel.style.left = (posPanel / canvasWidth * 100) + "%";
-        posPanel += canvasWidth / 100 * 0.5;
+    if (posPanel <= canvasWidth + 28 && timer != null) {
+        panel.style.left = (posPanel) + "px";
+        posPanel += (canvasWidth + 28) / 100 * 0.5;
         requestAnimationFrame(panelDisparition)
     }
     else
@@ -174,10 +193,10 @@ function panelApparition()
     clearTimeout(timer);
     timer = null;
     insideLoop = true;
-    if (posPanel > canvasWidth / 100 * 90)
+    if (posPanel > canvasWidth - panel.clientWidth + 17)
     {
-        panel.style.left = (posPanel / canvasWidth * 100) + "%";
-        posPanel -= canvasWidth / 100 * 0.5;
+        panel.style.left = (posPanel) + "px";
+        posPanel -= (canvasWidth - panel.clientWidth + 17) / 100 * 0.5;
         requestAnimationFrame(panelApparition);
     }
     else {
@@ -187,8 +206,10 @@ function panelApparition()
 }
 
 function onMouseMove( event ) {
-        if (!insideLoop && camera.zoom <= 2)
-              panelApparition();
+    if (zooming)
+        return;
+    if (!insideLoop && camera.zoom <= 2)
+        panelApparition();
 
     // calculate mouse position in normalized device coordinates
     // (-1 to +1) for both components
@@ -308,6 +329,9 @@ function createShape(index, flagColor)
 
 function release()
 {
+    insideLoop = false;
+    scale = 0.0001;
+    panelDisparition();
     for (var j = 0; j < tableCode.length; j++) {
         for(var i = 0; i < tableCode[j].length; i++) {
             scene.remove(tableCode[j][i].text);
@@ -345,14 +369,6 @@ function release()
     renderer.dispose();
 }
 
-function onWindowResize() {
-    window.removeEventListener('resize', onWindowResize, false)
-    renderer.domElement.removeEventListener( 'mousemove', onMouseMove, false );
-    renderer.domElement.removeEventListener( 'mousedown', onMouseDown, false );
-    release();
-    init();
-}
-
 function changeValue(value)
 {
     strValue = value;
@@ -371,11 +387,20 @@ function noScroll() {
     window.scrollTo(0, 0);
 }
 
+function getDocHeight(doc) {
+    doc = doc || document;
+    var body = doc.body, html = doc.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight,
+        html.clientHeight, html.scrollHeight, html.offsetHeight );
+    return height;
+}
+
 function init()
 {
     canvasWidth = window.innerWidth - 25;
     canvasHeight = window.innerHeight - 25 - 50;
     iframe = document.getElementById("content");
+    content = document.getElementById("iframe");
     iframe.style.zoom = scale;
     iframe.style.transform = ("scale(" + scale + ")");
     scene = new THREE.Scene();
@@ -495,7 +520,6 @@ function init()
             panel.removeChild(childsPanel[0]);
             childsPanel.shift();
         }
-        window.addEventListener('resize', onWindowResize, false)
         renderer.domElement.addEventListener( 'mousemove', onMouseMove, false );
         renderer.domElement.addEventListener( 'mousedown', onMouseDown, false );
         window.addEventListener('scroll', noScroll);
@@ -507,36 +531,33 @@ function init()
                 if (files[i].includes(".html"))
                 {
                     var str = files[i].substring(0, files[i].length - 5);
-                    var currentStr = (' ' + str).slice(1);
-                    var element = document.createElement("button");
-                    //Assign different attributes to the element.
-                    element.id = str;
-                    element.setAttribute("style","width:100%; max-height : 20%");
-                    element.innerText = str;
-                    for (var j = 0; j < dictionary.length; j++)
-                    {
-                        if (dictionary[j][0] === str)
+                    for (var j = 0; j < dictionary.length; j++) {
+                        if (dictionary[j][0] === str) {
+                            var element = document.createElement("button");
+                            //Assign different attributes to the element.
+                            element.id = str;
+                            element.setAttribute("style", "width:100%; max-height : 40%");
+                            element.innerText = str;
                             element.innerText = dictionary[j][1];
+                            element.innerText = dictionary[j][1];
+                            element.type = "button";
+                            element.value = str;
+                            element.name = str;
+                            element.onclick = function (index) {
+                                return function () {
+                                    panelDisparition();
+                                    strValue = index;
+                                    content.src = index + ".html";
+                                    match(iframe);
+                                };
+                            }(str);
+                            panel.appendChild(element);
+                            childsPanel.push(element);
+                        }
                     }
-                    element.type = "button";
-                    element.value = str;
-                    element.name = str;
-                    element.onclick = function(index) {
-                        return function () {
-                            changeValue(index);
-                            iframe.src = index + ".html";
-                        };
-                    }(str);
-                    childsPanel.push(element);
-                    panel.appendChild(element);
                 }
             }
         });
     } );
 
-
-
-// add listener to disable scroll
-
-    //window.requestAnimationFrame(render);
 }
