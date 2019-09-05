@@ -153,6 +153,7 @@ function zoom()
 }
 
 function match() {
+    changeValue(strValue);
     httpGetAsync("/files", function(files) {
         files = JSON.parse(files);
         var exists = false;
