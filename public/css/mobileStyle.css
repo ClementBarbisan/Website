@@ -68,6 +68,10 @@ div{
     font-family: typewriter, sans-serif;
 }
 
+#text{
+    width: 95%;
+}
+
 #panel{
     background-color: black;
 }
