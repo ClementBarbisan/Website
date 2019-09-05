@@ -144,7 +144,7 @@ function zoom()
         text.innerText = strValue;
         text.setAttribute("style", "font:typewriter; color:red;position: fixed; left:86%;top:79%;transform: rotate(35deg);background-image: url('stamp.png'); width:109px; height:109px; vertical-align:middle; text-align:center; line-height:109px;background-size:contain");
         //text.position = element.position;
-        content.contentDocument.getElementById("data").insertAdjacentElement('afterbegin', text);
+        content.contentDocument.getElementById("dataContainer").appendChild(text);
         zooming = false;
         return;
     }
