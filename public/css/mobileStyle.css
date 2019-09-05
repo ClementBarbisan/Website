@@ -1,7 +1,15 @@
+@font-face {
+    font-family: "typewriter";
+    src: url('../fonts/Tox Typewriter.ttf') format("truetype");
+}
+
 body {
     overflow: hidden;
-    background-color: black;
-    border-radius: 10px;
+    background-color: darkgrey;
+    background-image: url("../papery.png");
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: contain;
 }
 
 #close{
@@ -20,12 +28,28 @@ body {
     border-radius: 0;
 }
 
+#dataContainer{
+    padding-top:5%;
+    background-color: #dfdfdf;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+#data{
+    padding-top:-10%;
+    margin-left: 3%;
+    margin-right:2%;
+    display:inline;
+    float: left;
+}
+
 button{
     margin-top: 5%;
     opacity: 1;
     background-color: white;
     font-size: 100%;
-    font-family: Arial, sans-serif;
+    font-family: typewriter, sans-serif;
     border: 1px solid black;
     color:black;
     border-radius: 5px;
@@ -35,9 +59,13 @@ button:hover {
     color: white;
     background-color: black;
     font-size: 100%;
-    font-family: Arial, sans-serif;
+    font-family: typewriter, sans-serif;
     border: 1px solid white;
     border-radius: 5px;
+}
+
+div{
+    font-family: typewriter, sans-serif;
 }
 
 #panel{

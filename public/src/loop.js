@@ -418,7 +418,7 @@ function init()
     mouse = new THREE.Vector2();
 
     var loader = new THREE.FontLoader();
-    loader.load( 'fonts/Coolvetica Rg_Regular.json', function ( fontLoad ) {
+    loader.load( 'fonts/Tox Typewriter_Regular.json', function ( fontLoad ) {
         font = fontLoad
         var index = 0;
         for (var k = 0; k < 3; k++)
