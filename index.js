@@ -10,7 +10,8 @@ app.listen(4567, function() {
 
 app.get('/mobile', function(req, res)
 {
-    res.send("On construction for mobile!")
+    //res.send("On construction for mobile!")
+    res.render('mobile');
 });
 
 app.get('/files', function(req, res)

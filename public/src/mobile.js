@@ -8,12 +8,16 @@ function init()
         element.id ="close";
         element.type = "button";
         element.value = "X";
+        element.setAttribute("style", "position:absolute; left:90%; top:2%;transform:scale(3,3)")
         element.name = "close";
         element.innerText = "X";
         element.onclick = closeFrame;
         //var div = iframe.createElement("div");
         //div.appendChild(element);
-        iframe.contentWindow.document.body.appendChild(element);
+        iframe.contentWindow.document.getElementById("data").appendChild(element);
+        for (var i in iframe.contentWindow.document.getElementsByClassName("text")) {
+            iframe.contentWindow.document.getElementsByClassName("text")[i].setAttribute("style", "float:left");
+        }
 
     }
 }
