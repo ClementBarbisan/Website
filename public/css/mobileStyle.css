@@ -73,6 +73,8 @@ div{
     width: 94%;
     margin-left:3%;
     font-size:16pt;
+    float: end;
+    margin-top: 2%;
 }
 
 #panel{
