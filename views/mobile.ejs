@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="../css/mobileStyle.css">
 
-<body style="background-image: none; background-color: black;overflow: auto;">
+<body style="background-image: none; background-color: black;overflow-y: auto; overflow-x: hidden">
 
 <div id="panel" style="position:absolute; top:10%;left:50%; width:33%; -moz-transform: translateX(-50%);transform: translateX(-50%)">
 </div>
@@ -61,7 +61,7 @@
                             var element = document.createElement("button");
                             //Assign different attributes to the element.
                             element.id = str;
-                            element.setAttribute("style", "width:50%; max-height : 20%;margin-bottom:20%; transform:scale(3,3)");
+                            element.setAttribute("style", "width:75%; max-height : 20%;margin-bottom:20%; transform:scale(3,3)");
                             element.innerText = str;
                             element.innerText = dictionary[j][1];
                             element.innerText = dictionary[j][1];
