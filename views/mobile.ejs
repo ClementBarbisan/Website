@@ -68,12 +68,12 @@
                             element.type = "button";
                             element.value = str;
                             element.name = str;
-                            element.ontouchend =function (index) {
+                            /*element.ontouchend =function (index) {
                                 return function () {
                                     iframe.src = index + ".html";
                                     match();
                                 };
-                            }(str);
+                            }(str);*/
                             element.onclick = function (index) {
                                 return function () {
                                     iframe.src = index + ".html";
