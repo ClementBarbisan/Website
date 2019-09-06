@@ -68,7 +68,7 @@
                             element.type = "button";
                             element.value = str;
                             element.name = str;
-                            element.ontouchstart =function (index) {
+                            element.ontouchend =function (index) {
                                 return function () {
                                     iframe.src = index + ".html";
                                     match();
