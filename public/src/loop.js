@@ -120,6 +120,7 @@ function unzoom() {
         document.getElementById("button").innerText = "MATCH";
         zooming = false;
         content.src = "";
+        content.onload = null;
         return;
     }
     else
@@ -146,6 +147,7 @@ function zoom()
         //text.position = element.position;
         content.contentDocument.getElementById("dataContainer").appendChild(text);
         zooming = false;
+        content.onload = unzoom;
         return;
     }
     else
@@ -422,7 +424,6 @@ function init()
     lineWidth = canvasWidth / 67;
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
-
     var loader = new THREE.FontLoader();
     loader.load( 'fonts/Tox Typewriter_Regular.json', function ( fontLoad ) {
         font = fontLoad
