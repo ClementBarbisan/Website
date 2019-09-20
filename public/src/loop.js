@@ -148,6 +148,7 @@ function zoom()
         content.contentDocument.getElementById("dataContainer").appendChild(text);
         zooming = false;
         //content.onload = unzoom;
+        document.onclick = unzoom;
         return;
     }
     else
@@ -157,7 +158,8 @@ function zoom()
     scale *= 1.095;
     iframe.style.zoom = scale;
     iframe.style.transform = ("scale(" + scale + ")");
-    renderer.render(scene, camera);
+    //renderer.render(scene, camera);
+    render();
 }
 
 function match() {
