@@ -147,7 +147,7 @@ function zoom()
         //text.position = element.position;
         content.contentDocument.getElementById("dataContainer").appendChild(text);
         zooming = false;
-        content.onload = unzoom;
+        //content.onload = unzoom;
         return;
     }
     else
