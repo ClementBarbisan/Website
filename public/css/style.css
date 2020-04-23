@@ -1,6 +1,6 @@
 @font-face {
     font-family: "typewriter";
-    src: url('../fonts/Tox Typewriter.ttf') format("truetype");
+    src: url('../fonts/monaco.ttf') format("truetype");
 }
 
 body {

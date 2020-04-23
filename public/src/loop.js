@@ -25,7 +25,7 @@ var timer = null;
 var zooming = false;
 var strValue = "00000000";
 var childsPanel = [];
-var dictionary = [["20190603", "Babel Interpreter"], ["20170510", "Bodyfail"], ["20170611", "Traversée du silence"], ["20180611", "Magma"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
+var dictionary = [["20190603", "Babel Interpreter"], ["20161106", "KeyStrike"], ["20181507", "InsideOut"], ["20170510", "Bodyfail"], ["20170611", "Traversee du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthete"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
 
 function changeColor(index, flagColor, val)
 {
@@ -140,11 +140,12 @@ function zoom()
     {
         document.getElementById("button").onclick = unzoom;
         document.getElementById("button").innerText = "X";
-        console.log(content.contentDocument.getElementById("data"));
+        //console.log(content.contentDocument.getElementById("data"));
         var text = content.contentDocument.createElement("div");
         text.innerText = strValue;
         text.setAttribute("style", "font:typewriter; color:red;position: relative;transform: rotate(35deg);background-image: url('stamp.png'); width:109px; height:109px; vertical-align:middle; text-align:center; line-height:109px;background-size:contain; float:right; margin-right:3%;");
         //text.position = element.position;
+        //if (content.contentDocument.getElementById("dataContainer") && content.contentDocument.getElementById("dataContainer").value)
         content.contentDocument.getElementById("dataContainer").appendChild(text);
         zooming = false;
         //content.onload = unzoom;
@@ -178,6 +179,10 @@ function match() {
             }
         }
         if (!exists) {
+            content.src = "19882109.html";
+            zoom();
+            changeValue("19882109")
+            return;
             var val = document.getElementById("button").innerText;
             setTimeout(function () {
                 document.getElementById("button").innerText = val;
@@ -427,7 +432,7 @@ function init()
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
     var loader = new THREE.FontLoader();
-    loader.load( 'fonts/Tox Typewriter_Regular.json', function ( fontLoad ) {
+    loader.load( 'fonts/Monaco_Regular.json', function ( fontLoad ) {
         font = fontLoad
         var index = 0;
         for (var k = 0; k < 3; k++)

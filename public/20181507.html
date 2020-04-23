@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="../css/mobileStyle.css">
+
+    <meta charset="UTF-8">
+    <title>The Enemy</title>
+</head>
+<body  id="dataContainer">
+<div  id="data" class="plyr__video-embed" id="player">
+    <iframe width="640" height="480" src="InsideOut.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<div class="text">Application AR sur mobile.
+    <p class="text">Techno : Unity, Vuforia <a href="https://github.com/ClementBarbisan/InsideOut" target="_parent">Code source</a></p>
+</div>
+</body>
+<script src="../src/mobile.js">
+
+</script>
+<script src="../library/plyr.js"></script>
+<script>
+    plyr.setup('#video');
+</script>
+</html>
