@@ -143,7 +143,7 @@ function zoom()
         //console.log(content.contentDocument.getElementById("data"));
         var text = content.contentDocument.createElement("div");
         text.innerText = strValue;
-        text.setAttribute("style", "font:typewriter; color:red;position: relative;transform: rotate(35deg);background-image: url('stamp.png'); width:109px; height:109px; vertical-align:middle; text-align:center; line-height:109px;background-size:contain; float:right; margin-right:3%;");
+        text.setAttribute("style", "font-family:typewriter;src: url('../fonts/monaco.ttf') format(\"truetype\");font-size:24px; color:red;position: relative;transform: rotate(35deg);background-image: url('stamp.png'); width:109px; height:109px; vertical-align:middle; text-align:center; line-height:109px;background-size:contain; float:right; margin-right:3%;");
         //text.position = element.position;
         //if (content.contentDocument.getElementById("dataContainer") && content.contentDocument.getElementById("dataContainer").value)
         content.contentDocument.getElementById("dataContainer").appendChild(text);
