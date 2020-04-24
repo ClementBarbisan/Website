@@ -179,10 +179,10 @@ function match() {
             }
         }
         if (!exists) {
-            content.src = "19882109.html";
-            zoom();
-            changeValue("19882109")
-            return;
+            // content.src = "19882109.html";
+            // zoom();
+            // changeValue("19882109")
+            // return;
             var val = document.getElementById("button").innerText;
             setTimeout(function () {
                 document.getElementById("button").innerText = val;
