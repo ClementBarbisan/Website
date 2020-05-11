@@ -25,7 +25,7 @@ var timer = null;
 var zooming = false;
 var strValue = "00000000";
 var childsPanel = [];
-var dictionary = [["20190603", "Babel Interpreter"], ["20161106", "KeyStrike"], ["20181507", "InsideOut"], ["20170510", "Bodyfail"], ["20170611", "Traversee du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthete"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
+var dictionary = [["20200505", "Leap'Em Up"],["20190603", "Babel Interpreter"], ["20161106", "KeyStrike"], ["20181507", "InsideOut"], ["20170510", "Bodyfail"], ["20170611", "Traversee du silence"], ["20180611", "Magma"], ["20150611", "Dialogue synesthete"], ["20170405", "The Enemy"], ["20171011", "Scan Pyramids VR"], ["20182406", "Karl"], ["20190605", "Semantic Emotions"]];
 
 function changeColor(index, flagColor, val)
 {
