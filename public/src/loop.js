@@ -262,7 +262,7 @@ function render() {
                 val.text.material.dispose();
                 var geom = new THREE.TextGeometry(val.val + "", {
                     font: font,
-                    size: 80,
+                    size: canvasWidth / 20,
                     height: 1,
                     curveSegments : 24
                 } );
