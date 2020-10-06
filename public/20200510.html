@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="../css/mobileStyle.css">
+
+    <meta charset="UTF-8">
+    <title>Leap'Em Up</title>
+</head>
+<body  id="dataContainer">
+<div id="data">
+<div class="plyr__video-embed" id="player">
+    <iframe height="100%" src="pacxit_sample.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</div>
+<div class="text">
+    <p>Ludum Dare 47 : "Stuck in a loop"</p>
+
+    <p>Trouvez la sortie grace au son. Chaque fantome vous l'indique a leurs manieres.
+    C'est une sorte de Pacman, car je pense que tous les jeux d'arcade sont des boucles.
+        Chaque fantome a un impact different sur le son, mais la distance avec la sortie les affecte tous:</p>
+
+    <p>Le rouge modifie le pitch.
+    Le rose modifie le son suivant une formule trigonometrique.
+    Le vert ajoute du bruit de perlin.
+        Le bleu est un filtre de distorsion integre a Unity.</p>
+
+    <p>La distance entre vous et la sortie modifie le volume, si vous prenez une pilule tous les fantomes s'arreteront ainsi que leurs effets, vous pourrez ainsi entendre la musique telle qu'elle est avec le volume modifie.
+
+    Donc en bref, si tous les fantomes sont sur la sortie avec vous, vous entendrez la musique a plein volume. Mais cela n'arrivera jamais.
+
+        Oh, au fait, vous perdez un point a chaque fois que vous changez de direction.</p>
+</div>
+<div class="text">
+    <p>Techno : Unity.</p><p> <a href="https://github.com/ClementBarbisan/Pacxit" target="_parent">Code source</a></p>
+    <p><a href="https://randomlockness.itch.io/pacxit" target="_parent">Pacxit</a> </p>
+</div>
+</body>
+<script src="../src/mobile.js">
+
+</script>
+</html>
