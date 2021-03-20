@@ -421,7 +421,7 @@ function init()
     iframe.style.transform = ("scale(" + scale + ")");
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
-    camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 1000);
+    camera = new THREE.PerspectiveCamera(60, canvasWidth / canvasHeight, 0.01, 1000);
     //camera = new THREE.OrthographicCamera(-canvasWidth / 2, canvasWidth / 2, -canvasHeight / 2, canvasHeight / 2, 0.01, 10000);
     camera.position.set(0, 0, 900);
     renderer = new THREE.WebGLRenderer();
