@@ -30,9 +30,9 @@ var dictionary = [["20200610", "Gravitron"], ["20161107", "Skeleto Muscular Opti
 function changeColor(index, flagColor, val)
 {
     if (flagColor)
-        val.mat[index].color.set(0xffffff);
-    else
         val.mat[index].color.set(0x000000);
+    else
+        val.mat[index].color.set(0xffffff);
 }
 
 function httpGetAsync(theUrl, callback)
@@ -60,7 +60,7 @@ function createShapeDynamic(index, flagColor, indexTable, val)
     val.geom.push(geometry);
     if (flagColor === 0) {
         material = new THREE.MeshBasicMaterial({
-            color:0x000000,
+            color:0xffffff,
             side:THREE.DoubleSide
         });
         val.mat.push(material);
@@ -71,7 +71,7 @@ function createShapeDynamic(index, flagColor, indexTable, val)
     }
     else {
         material = new THREE.MeshBasicMaterial({
-            color:0xffffff,
+            color:0x000000,
             side:THREE.DoubleSide
         });
         val.mat.push(material);
